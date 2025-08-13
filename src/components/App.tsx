@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { Navigate, Route, Routes, HashRouter } from 'react-router-dom';
+import { Routes, HashRouter } from 'react-router-dom';
 import { retrieveLaunchParams, useSignal, isMiniAppDark } from '@telegram-apps/sdk-react';
 import { AppRoot } from '@telegram-apps/telegram-ui';
 
-import { routes } from '@/navigation/routes.tsx';
+import { routes } from '@/navigation/routes.jsx';
 
 export function App() {
   const lp = useMemo(() => retrieveLaunchParams(), []);
@@ -15,10 +15,8 @@ export function App() {
       platform={['macos', 'ios'].includes(lp.tgWebAppPlatform) ? 'ios' : 'base'}
     >
       <HashRouter>
-        <Routes>
-          {routes.map((route) => <Route key={route.path} {...route} />)}
-          <Route path="*" element={<Navigate to="/"/>}/>
-        </Routes>
+        {/* E’TIBOR: bu yerda .map yo‘q */}
+        <Routes>{routes}</Routes>
       </HashRouter>
     </AppRoot>
   );
